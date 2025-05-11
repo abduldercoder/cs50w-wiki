@@ -1,0 +1,21 @@
+{# This tells Django to reuse the layout from layout.html #}
+{% extends "encyclopedia/layout.html" %}
+
+{# This block will replace the {% block title %} in layout.html #}
+{% block title %}
+{{ title }} {# This sets the tab title to the name of the page (e.g. "Python") #}
+{% endblock %}
+
+{# This block will replace the {% block body %} in layout.html #}
+
+{% block body %}
+{# This displays the actual content of the entry, converted from Markdown to HTML #}
+
+{{ content|safe }}
+{# The |safe filter tells Django: "Don't escape this, it's already HTML" #}
+
+<p>
+    <a href="{% url 'edit' title=title %}">Edit this page</a>
+</p>
+{# This link lets users go to the edit page for this entry #}
+{% endblock %}

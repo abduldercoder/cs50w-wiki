@@ -1,0 +1,29 @@
+{# Inherit from the base layout so the sidebar and styles are included #}
+{% extends "encyclopedia/layout.html" %}
+
+{# Set the browser tab title #}
+{% block title %}
+Search Results
+{% endblock %}
+
+{# Main content of the page goes here #}
+{% block body %}
+<h1>Search Results for "{{ query }}"</h1>
+
+{# If the list of entries is not empty, show each result as a link #}
+{% if entries %}
+<ul>
+    {% for entry in entries %}
+    <li>
+        {# Link to the entry's wiki page using the 'entry' route and pass the title #}
+        <a href="{% url 'entry' title=entry %}">{{ entry }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+{# If no results were found, show a message #}
+{% else %}
+<p>No results found for "{{ query }}".</p>
+{% endif %}
+
+{% endblock %}
